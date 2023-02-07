@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 2,
+  "articles": [
+    {
+      "source": {
+        "id": "Slashdot.org",
+        "name": "Slashdot.org"
+      },
+      "author": "BeauHD",
+      "title": "Google Releases Flutter 3.7, Teases Future of App Development Framework",
+      "description": "An anonymous reader quotes a report from 9to5Google: At the Flutter Forward event, Google released Flutter 3.7 with more Material You widgets and menus support, while also teasing the future of the app development framework. Having grown from humble beginning…",
+      "url": "https://news.slashdot.org/story/23/01/25/2055227/google-releases-flutter-37-teases-future-of-app-development-framework",
+      "urlToImage": "https://a.fsdn.com/sd/topics/topicgoogle_fb.gif",
+      "publishedAt": "2023-01-25T22:20:00Z",
+      "content": "At the Flutter Forward event, Google released Flutter 3.7 with more Material You widgets and menus support, while also teasing the future of the app development framework. Having grown from humble be… [+2495 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Slashdot.org"
+      },
+      "author": "BeauHD2",
+      "title": "Google Releases Flutter 3.7, Teases Future of App Development Framework2",
+      "description": "An anonymous reader quotes a report from 9to5Google: At the Flutter Forward event, Google released Flutter 3.7 with more Material You widgets and menus support, while also teasing the future of the app development framework. Having grown from humble beginning…",
+      "url": "https://news.slashdot.org/story/23/01/25/2055227/google-releases-flutter-37-teases-future-of-app-development-framework",
+      "urlToImage": "https://a.fsdn.com/sd/topics/topicgoogle_fb.gif",
+      "publishedAt": "2023-01-25T22:20:00Z",
+      "content": "At the Flutter Forward event, Google released Flutter 3.7 with more Material You widgets and menus support, while also teasing the future of the app development framework. Having grown from humble be… [+2495 chars]"
+    }
+  ]
+}

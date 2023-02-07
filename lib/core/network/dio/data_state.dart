@@ -16,8 +16,6 @@ class DataSuccess<T> extends DataState<T> {
 
 class DataFailed<T> extends DataState<T> {
   static const networkFailure = "Oops, network failure. Please check your internet connection.";
-  static const dbFailure = "Failed to connect to Database";
-
   const DataFailed(String error) : super(error: error);
 
   @override

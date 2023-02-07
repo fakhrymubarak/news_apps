@@ -1,16 +1,21 @@
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
-import 'package:loyalty_white_label/common/helpers/log_helpers.dart';
-import 'package:loyalty_white_label/common/helpers/network_helpers/error_response.dart';
+import 'package:news_apps/core/core.dart';
+
+import '../response/error_response.dart';
 
 class DioException implements Exception {
-  static const serverNotFound = "Oops, server not found, please try again in a moment or contact us.";
-  static const serverError = "Oops, there's something error on server, please try again in a moment or contact us.";
-  static const connTimeout = "Oops, connection timed out. Please check your connection to internet.";
-  static const networkNotFound = "Oops, you seem to be offline. Please check your connection to internet.";
-  static const appsError = "Oops, there's something error on apps, please contact us.";
+  static const serverNotFound =
+      "Oops, server not found, please try again in a moment or contact us.";
+  static const serverError =
+      "Oops, there's something error on server, please try again in a moment or contact us.";
+  static const connTimeout =
+      "Oops, connection timed out. Please check your connection to internet.";
+  static const networkNotFound =
+      "Oops, you seem to be offline. Please check your connection to internet.";
+  static const appsError =
+      "Oops, there's something error on apps, please contact us.";
 
   late String errorMessage;
 
@@ -43,7 +48,7 @@ class DioException implements Exception {
         break;
       default:
         errorMessage =
-        "Oops, there's something error on apps, please contact us.";
+            "Oops, there's something error on apps, please contact us.";
         break;
     }
     logError(dioError.message, StackTrace.current);
@@ -55,11 +60,11 @@ class DioException implements Exception {
 
     try {
       errResponse = ErrorResponse.fromJson(jsonDecode(jsonResponse));
-    } catch (e){
+    } catch (e) {
       errResponse = null;
     }
 
-    final errorMessage = errResponse?.errors.firstOrNull?.message ?? serverError;
+    final errorMessage = errResponse?.message ?? serverError;
     switch (response?.statusCode) {
       case 400:
         return errorMessage;
