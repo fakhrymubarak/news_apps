@@ -7,6 +7,9 @@ Route onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case Routes.home:
       return _toPage(const HomePage());
+    case Routes.newsDetails:
+      final url = settings.arguments as String;
+      return _toPage(NewsDetailPage(webUrl: url));
     default:
       return _toPage(const HomePage(), settings);
   }
@@ -21,6 +24,5 @@ class Routes {
 
   static const home = '/home';
   static const headlines = '/headlines';
+  static const newsDetails = '/news-details';
 }
-  
-  

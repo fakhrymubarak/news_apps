@@ -6,3 +6,4 @@ export 'domain/entities/article.dart';
 export 'domain/repositories/news_repository.dart';
 export 'presentation/bloc/home_bloc.dart';
 export 'presentation/pages/home_page.dart';
+export 'presentation/pages/news_detail_page.dart';
