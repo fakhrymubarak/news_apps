@@ -31,7 +31,7 @@ void main() {
   final tHeadlinesResponse = NewsResponse(
     status: "ok",
     totalResults: 100,
-    articles: [tArticles1, tArticles2],
+    articles: [dummyArticlesModel1, dummyArticlesModel2],
   );
 
   group('getListHeadlines()', () {
@@ -51,7 +51,8 @@ void main() {
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        final expectedResult = DataSuccess([tArticles1, tArticles2]);
+        verify(mockApiService.getTopHeadlines('id', 1, 20));
+        final expectedResult = DataSuccess([dummyArticlesModel1, dummyArticlesModel2]);
         expect(result, equals(expectedResult));
       });
 
@@ -66,6 +67,7 @@ void main() {
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
+        verify(mockApiService.getTopHeadlines('id', 1, 20));
         const expectedResult = DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
         expect(result, equals(expectedResult));
       });
@@ -79,6 +81,7 @@ void main() {
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
+        verify(mockApiService.getTopHeadlines('id', 1, 20));
         const expectedResult = DataFailed<List<ArticleModel>>("Request send timeout.");
         expect(result, equals(expectedResult));
       });
@@ -93,6 +96,7 @@ void main() {
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
+        verifyNever(mockApiService.getTopHeadlines('id', 1, 20));
         const expectedResult = DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
         expect(result, equals(expectedResult));
       });

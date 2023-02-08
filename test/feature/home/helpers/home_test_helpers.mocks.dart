@@ -3,16 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:news_apps/core/core.dart' as _i2;
-import 'package:news_apps/features/home/data/models/news_response.dart' as _i6;
+import 'package:news_apps/core/core.dart' as _i3;
+import 'package:news_apps/features/home/data/models/news_response.dart' as _i9;
 import 'package:news_apps/features/home/data/remote/news_api_service.dart'
-    as _i7;
+    as _i10;
 import 'package:news_apps/features/home/data/remote/news_remote_data_source.dart'
-    as _i4;
-import 'package:retrofit/retrofit.dart' as _i3;
+    as _i8;
+import 'package:news_apps/features/home/domain/entities/article.dart' as _i7;
+import 'package:news_apps/features/home/domain/repositories/news_repository.dart'
+    as _i5;
+import 'package:retrofit/retrofit.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -25,8 +29,8 @@ import 'package:retrofit/retrofit.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDataState_0<T> extends _i1.SmartFake implements _i2.DataState<T> {
-  _FakeDataState_0(
+class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
+  _FakeEither_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -35,9 +39,8 @@ class _FakeDataState_0<T> extends _i1.SmartFake implements _i2.DataState<T> {
         );
 }
 
-class _FakeHttpResponse_1<T> extends _i1.SmartFake
-    implements _i3.HttpResponse<T> {
-  _FakeHttpResponse_1(
+class _FakeDataState_1<T> extends _i1.SmartFake implements _i3.DataState<T> {
+  _FakeDataState_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -46,43 +49,81 @@ class _FakeHttpResponse_1<T> extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [NewsRemoteDataSource].
+class _FakeHttpResponse_2<T> extends _i1.SmartFake
+    implements _i4.HttpResponse<T> {
+  _FakeHttpResponse_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [NewsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNewsRemoteDataSource extends _i1.Mock
-    implements _i4.NewsRemoteDataSource {
-  MockNewsRemoteDataSource() {
+class MockNewsRepository extends _i1.Mock implements _i5.NewsRepository {
+  MockNewsRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.DataState<List<_i6.ArticleModel>>> getTopHeadlines() =>
+  _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>> getTopHeadlines() =>
       (super.noSuchMethod(
         Invocation.method(
           #getTopHeadlines,
           [],
         ),
-        returnValue: _i5.Future<_i2.DataState<List<_i6.ArticleModel>>>.value(
-            _FakeDataState_0<List<_i6.ArticleModel>>(
+        returnValue:
+            _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>>.value(
+                _FakeEither_0<_i3.Failure, List<_i7.Article>>(
           this,
           Invocation.method(
             #getTopHeadlines,
             [],
           ),
         )),
-      ) as _i5.Future<_i2.DataState<List<_i6.ArticleModel>>>);
+      ) as _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>>);
+}
+
+/// A class which mocks [NewsRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNewsRemoteDataSource extends _i1.Mock
+    implements _i8.NewsRemoteDataSource {
+  MockNewsRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<_i3.DataState<List<_i9.ArticleModel>>> getTopHeadlines() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getTopHeadlines,
+          [],
+        ),
+        returnValue: _i6.Future<_i3.DataState<List<_i9.ArticleModel>>>.value(
+            _FakeDataState_1<List<_i9.ArticleModel>>(
+          this,
+          Invocation.method(
+            #getTopHeadlines,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.DataState<List<_i9.ArticleModel>>>);
 }
 
 /// A class which mocks [NewsApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNewsApiService extends _i1.Mock implements _i7.NewsApiService {
+class MockNewsApiService extends _i1.Mock implements _i10.NewsApiService {
   MockNewsApiService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.HttpResponse<_i6.NewsResponse>> getTopHeadlines(
+  _i6.Future<_i4.HttpResponse<_i9.NewsResponse>> getTopHeadlines(
     String? country,
     int? page,
     int? pageSize,
@@ -96,8 +137,8 @@ class MockNewsApiService extends _i1.Mock implements _i7.NewsApiService {
             pageSize,
           ],
         ),
-        returnValue: _i5.Future<_i3.HttpResponse<_i6.NewsResponse>>.value(
-            _FakeHttpResponse_1<_i6.NewsResponse>(
+        returnValue: _i6.Future<_i4.HttpResponse<_i9.NewsResponse>>.value(
+            _FakeHttpResponse_2<_i9.NewsResponse>(
           this,
           Invocation.method(
             #getTopHeadlines,
@@ -108,5 +149,5 @@ class MockNewsApiService extends _i1.Mock implements _i7.NewsApiService {
             ],
           ),
         )),
-      ) as _i5.Future<_i3.HttpResponse<_i6.NewsResponse>>);
+      ) as _i6.Future<_i4.HttpResponse<_i9.NewsResponse>>);
 }

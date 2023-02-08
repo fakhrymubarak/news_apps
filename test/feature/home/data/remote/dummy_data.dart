@@ -1,7 +1,7 @@
 part of 'news_remote_data_source_test.dart';
 
 // dummy helpers
-final tArticles1 = ArticleModel(
+final dummyArticlesModel1 = ArticleModel(
   source: const Source(id: "id", name: "na,e"),
   author: "author1",
   title: "title1",
@@ -12,7 +12,7 @@ final tArticles1 = ArticleModel(
   content: "content",
 );
 
-final tArticles2 = ArticleModel(
+final dummyArticlesModel2 = ArticleModel(
   source: const Source(id: "id", name: "na,e"),
   author: "author2",
   title: "title2",

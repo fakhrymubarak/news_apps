@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:news_apps/features/home/domain/entities/article.dart';
 
-class NewsResponse extends Equatable{
+class NewsResponse extends Equatable {
   const NewsResponse({
     required this.status,
     required this.totalResults,
@@ -12,16 +13,17 @@ class NewsResponse extends Equatable{
   final List<ArticleModel> articles;
 
   factory NewsResponse.fromJson(Map<String, dynamic> json) => NewsResponse(
-    status: json["status"],
-    totalResults: json["totalResults"],
-    articles: List<ArticleModel>.from(json["articles"].map((x) => ArticleModel.fromJson(x))),
-  );
+        status: json["status"],
+        totalResults: json["totalResults"],
+        articles: List<ArticleModel>.from(
+            json["articles"].map((x) => ArticleModel.fromJson(x))),
+      );
 
   @override
   List<Object?> get props => [status, totalResults, articles];
 }
 
-class ArticleModel extends Equatable{
+class ArticleModel extends Equatable {
   const ArticleModel({
     required this.source,
     required this.author,
@@ -43,16 +45,24 @@ class ArticleModel extends Equatable{
   final String content;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
-    source: Source.fromJson(json["source"]),
-    author: json["author"],
-    title: json["title"],
-    description: json["description"],
-    url: json["url"],
-    urlToImage: json["urlToImage"],
-    publishedAt: DateTime.parse(json["publishedAt"]),
-    content: json["content"],
-  );
+        source: Source.fromJson(json["source"]),
+        author: json["author"],
+        title: json["title"],
+        description: json["description"],
+        url: json["url"],
+        urlToImage: json["urlToImage"],
+        publishedAt: DateTime.parse(json["publishedAt"]),
+        content: json["content"],
+      );
 
+  Article toEntity() => Article(
+      source: source.name,
+      author: author,
+      title: title,
+      description: description,
+      url: url,
+      urlToImage: urlToImage,
+      publishedAt: publishedAt);
 
   @override
   List<Object?> get props => [author, title];
@@ -68,7 +78,7 @@ class Source {
   final String name;
 
   factory Source.fromJson(Map<String, dynamic> json) => Source(
-    id: json["id"],
-    name: json["name"],
-  );
+        id: json["id"],
+        name: json["name"],
+      );
 }
