@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:news_apps/core/core.dart';
 import 'package:news_apps/themes/themes.dart';
 
 void showSnackBar(BuildContext context, String message) =>
@@ -34,7 +35,10 @@ class NetworkImage extends StatelessWidget {
         fit: fit ?? BoxFit.cover,
         imageUrl: url,
         progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-          child: CircularProgressIndicator(value: downloadProgress.progress),
+          child: CircularProgressIndicator(
+            key: Keys.loadingProgress,
+            value: downloadProgress.progress,
+          ),
         ),
         errorWidget: (context, url, error) => Center(
           child: SvgPicture.asset(Assets.imgError),

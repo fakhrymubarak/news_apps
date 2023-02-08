@@ -6,14 +6,19 @@ import 'package:news_apps/themes/themes.dart';
 class ArticleWidget extends StatelessWidget {
   final Article article;
 
-  const ArticleWidget({Key? key, required this.article}) : super(key: key);
+  const ArticleWidget({
+    Key? key,
+    required this.article,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      key: Keys.articleWidget,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, Routes.newsDetails, arguments: article.url),
+        onTap: () => Navigator.pushNamed(context, Routes.newsDetails,
+            arguments: article.url),
         child: Container(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -57,7 +62,8 @@ class ArticleWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 4.0),
-                  NetworkImage(url: article.urlToImage, height: 100, width: 100),
+                  NetworkImage(
+                      url: article.urlToImage, height: 100, width: 100),
                 ],
               )
             ],

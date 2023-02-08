@@ -20,10 +20,12 @@ class _TitleHeadlineSection extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-            child: Text(
-          Strings.textTopHeadlines,
-          style: TextStyles.bold16pt(),
-        )),
+          child: Text(
+            key : Keys.txtTopHeadlines,
+            Strings.textTopHeadlines,
+            style: TextStyles.bold16pt(),
+          ),
+        ),
         IconButton(
           onPressed: () => Navigator.pushNamed(context, Routes.headlines),
           icon: SvgPicture.asset(Assets.icMore),
@@ -53,6 +55,7 @@ class _ListHeadlinesSection extends StatelessWidget {
           return const ShimmerListWidget(enabled: true);
         } else if (state is HomeHeadlineHasDataState) {
           return ListView.builder(
+            key: Keys.listHeadlines,
             itemCount: state.articles.length,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -62,7 +65,7 @@ class _ListHeadlinesSection extends StatelessWidget {
             },
           );
         }
-        return const Center(child: Text(Strings.textEmptyData));
+        return const Center(key: Keys.articleWidget, child: Text(Strings.textEmptyData));
       },
     );
   }
