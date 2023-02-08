@@ -1,22 +1,22 @@
 part of 'top_headlines_bloc.dart';
 
 @immutable
-abstract class TopHeadlineState extends Equatable {
-  const TopHeadlineState();
+abstract class TopHeadlinesState extends Equatable {
+  const TopHeadlinesState();
 
   @override
   List<Object?> get props => [];
 }
 
-class TopHeadlineInitialState extends TopHeadlineState {
+class TopHeadlineInitialState extends TopHeadlinesState {
   const TopHeadlineInitialState();
 }
 
-class TopHeadlineLoadingState extends TopHeadlineState {
+class TopHeadlineLoadingState extends TopHeadlinesState {
   const TopHeadlineLoadingState();
 }
 
-class TopHeadlineHasDataState extends TopHeadlineState {
+class TopHeadlineHasDataState extends TopHeadlinesState {
   final List<Article> articles;
   const TopHeadlineHasDataState(this.articles);
 
@@ -24,7 +24,7 @@ class TopHeadlineHasDataState extends TopHeadlineState {
   List<Object?> get props => [articles];
 }
 
-class TopHeadlineErrorState extends TopHeadlineState {
+class TopHeadlineErrorState extends TopHeadlinesState {
   final String message;
   const TopHeadlineErrorState(this.message);
 

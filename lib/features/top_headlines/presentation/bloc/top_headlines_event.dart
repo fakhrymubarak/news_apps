@@ -8,3 +8,7 @@ abstract class TopHeadlinesEvent {
 class TopHeadlineFetch extends TopHeadlinesEvent {
   const TopHeadlineFetch();
 }
+
+class TopHeadlineFetchNextPage extends TopHeadlinesEvent {
+  const TopHeadlineFetchNextPage();
+}

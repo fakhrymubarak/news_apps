@@ -43,14 +43,14 @@ void main() {
         // arrange - response code to 200
         final httpResponse = HttpResponse(tHeadlinesResponse, testResponseOk);
 
-        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+        when(mockApiService.getTopHeadlines('id', 1, 10)).thenAnswer(
           (_) async => httpResponse,
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        verify(mockApiService.getTopHeadlines('id', 1, 10));
         final expectedResult =
             DataSuccess([dummyArticlesModel1, dummyArticlesModel2]);
         expect(result, equals(expectedResult));
@@ -61,14 +61,14 @@ void main() {
         final httpResponse =
             HttpResponse(tHeadlinesResponse, testResponseUnauthorized);
 
-        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+        when(mockApiService.getTopHeadlines('id', 1, 10)).thenAnswer(
           (_) async => httpResponse,
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        verify(mockApiService.getTopHeadlines('id', 1, 10));
         const expectedResult =
             DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
         expect(result, equals(expectedResult));
@@ -76,14 +76,14 @@ void main() {
 
       test('Should return DataFailed() when request send time out', () async {
         // arrange - response timeout
-        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+        when(mockApiService.getTopHeadlines('id', 1, 10)).thenAnswer(
           (_) async => throw throwDioError,
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        verify(mockApiService.getTopHeadlines('id', 1, 10));
         const expectedResult =
             DataFailed<List<ArticleModel>>("Request send timeout.");
         expect(result, equals(expectedResult));
@@ -91,14 +91,14 @@ void main() {
 
       test('Should return DataFailed() when unexpected exception', () async {
         // arrange - response timeout
-        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+        when(mockApiService.getTopHeadlines('id', 1, 10)).thenAnswer(
           (_) async => throw ArgumentError("type 'Null' is not a subtype of type 'String'"),
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        verify(mockApiService.getTopHeadlines('id', 1, 10));
         const expectedResult =
             DataFailed<List<ArticleModel>>("Invalid argument(s): type 'Null' is not a subtype of type 'String'");
         expect(result, equals(expectedResult));
@@ -114,7 +114,7 @@ void main() {
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verifyNever(mockApiService.getTopHeadlines('id', 1, 5));
+        verifyNever(mockApiService.getTopHeadlines('id', 1, 10));
         const expectedResult =
             DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
         expect(result, equals(expectedResult));

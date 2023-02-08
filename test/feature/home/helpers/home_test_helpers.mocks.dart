@@ -69,11 +69,13 @@ class MockNewsRepository extends _i1.Mock implements _i5.NewsRepository {
   }
 
   @override
-  _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>> getTopHeadlines() =>
+  _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>> getTopHeadlines(
+          {int? page = 1}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTopHeadlines,
           [],
+          {#page: page},
         ),
         returnValue:
             _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>>.value(
@@ -82,6 +84,7 @@ class MockNewsRepository extends _i1.Mock implements _i5.NewsRepository {
           Invocation.method(
             #getTopHeadlines,
             [],
+            {#page: page},
           ),
         )),
       ) as _i6.Future<_i2.Either<_i3.Failure, List<_i7.Article>>>);
@@ -97,11 +100,20 @@ class MockNewsRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i6.Future<_i3.DataState<List<_i9.ArticleModel>>> getTopHeadlines() =>
+  _i6.Future<_i3.DataState<List<_i9.ArticleModel>>> getTopHeadlines({
+    String? country = r'id',
+    int? page = 1,
+    int? pageSize = 10,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTopHeadlines,
           [],
+          {
+            #country: country,
+            #page: page,
+            #pageSize: pageSize,
+          },
         ),
         returnValue: _i6.Future<_i3.DataState<List<_i9.ArticleModel>>>.value(
             _FakeDataState_1<List<_i9.ArticleModel>>(
@@ -109,6 +121,11 @@ class MockNewsRemoteDataSource extends _i1.Mock
           Invocation.method(
             #getTopHeadlines,
             [],
+            {
+              #country: country,
+              #page: page,
+              #pageSize: pageSize,
+            },
           ),
         )),
       ) as _i6.Future<_i3.DataState<List<_i9.ArticleModel>>>);

@@ -11,8 +11,8 @@ class NewsRepositoryImpl extends NewsRepository {
   NewsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<Article>>> getTopHeadlines() async {
-    final result = await remoteDataSource.getTopHeadlines();
+  Future<Either<Failure, List<Article>>> getTopHeadlines({int page = 1}) async {
+    final result = await remoteDataSource.getTopHeadlines(page: page);
     if (result is DataSuccess) {
       return Right(result.data!.map((model) => model.toEntity()).toList());
     } else {

@@ -7,27 +7,47 @@ import 'package:news_apps/features/home/presentation/widgets/shimmer_list.dart';
 import 'package:news_apps/features/top_headlines/presentation/bloc/top_headlines_bloc.dart';
 import 'package:news_apps/injection.dart' as di;
 import 'package:news_apps/themes/themes.dart';
+import 'package:provider/provider.dart';
 
 class TopHeadlinesPage extends StatelessWidget {
   const TopHeadlinesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return Provider(
       create: (context) => di.injector<TopHeadlinesBloc>(),
-      child: SafeArea(
+      builder:(context, _) => SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: const [
-                  _TopHeadlineAppBar(),
-                  _ListHeadlinesSection(),
-                ],
-              ),
-            ),
+          body: Column(
+            children: [
+              const _TopHeadlineAppBar(),
+              Expanded(
+                child : NotificationListener<ScrollEndNotification>(
+                  onNotification: (scrollEnd) {
+                    final metrics = scrollEnd.metrics;
+                    if (metrics.atEdge) {
+                      bool isTop = metrics.pixels == 0;
+                      if (!isTop) {
+                        context.read<TopHeadlinesBloc>().add(const TopHeadlineFetchNextPage());
+                      }
+                    }
+                    return true;
+                  },
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: const [
+                          _ListHeadlinesSection(),
+                          _ShimmerLoadingHeadlines(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -63,19 +83,18 @@ class _ListHeadlinesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<TopHeadlinesBloc>().add(const TopHeadlineFetch());
-    return BlocConsumer<TopHeadlinesBloc, TopHeadlineState>(
+    return BlocConsumer<TopHeadlinesBloc, TopHeadlinesState>(
       listenWhen: (_, current) => current is TopHeadlineErrorState,
       listener: (context, state) {
-        if (state is TopHeadlineErrorState) showSnackBar(context, state.message);
+        if (state is TopHeadlineErrorState) {
+          showSnackBar(context, state.message);
+        }
       },
       buildWhen: (_, current) =>
-          current is TopHeadlineLoadingState ||
           current is TopHeadlineHasDataState ||
           current is TopHeadlineErrorState,
       builder: (context, state) {
-        if (state is TopHeadlineLoadingState) {
-          return const ShimmerListWidget(enabled: true);
-        } else if (state is TopHeadlineHasDataState) {
+        if (state is TopHeadlineHasDataState) {
           return ListView.builder(
             itemCount: state.articles.length,
             physics: const NeverScrollableScrollPhysics(),
@@ -85,8 +104,26 @@ class _ListHeadlinesSection extends StatelessWidget {
               return ArticleWidget(article: article);
             },
           );
+        } else if (state is TopHeadlineInitialState) {
+          return const SizedBox.shrink();
         }
         return const Center(child: Text(Strings.textEmptyData));
+      },
+    );
+  }
+}
+
+class _ShimmerLoadingHeadlines extends StatelessWidget {
+  const _ShimmerLoadingHeadlines({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TopHeadlinesBloc, TopHeadlinesState>(
+      builder: (context, state) {
+        if (state is TopHeadlineLoadingState) {
+          return const ShimmerListWidget(enabled: true);
+        }
+        return const SizedBox.shrink();
       },
     );
   }

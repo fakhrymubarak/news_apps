@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_apps/features/home/home.dart';
-import 'package:news_apps/features/top_headlines/presentation/bloc/top_headlines_bloc.dart';
+import 'package:news_apps/features/top_headlines/top_headlines.dart';
 
 import 'core/core.dart';
 

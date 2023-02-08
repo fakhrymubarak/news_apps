@@ -5,7 +5,11 @@ import '../models/news_response.dart';
 import 'news_api_service.dart';
 
 abstract class NewsRemoteDataSource {
-  Future<DataState<List<ArticleModel>>> getTopHeadlines();
+  Future<DataState<List<ArticleModel>>> getTopHeadlines({
+    String country = 'id',
+    int page = 1,
+    int pageSize = 10,
+  });
 }
 
 class NewsRemoteDataSourceImpl extends NewsRemoteDataSource {
@@ -18,13 +22,17 @@ class NewsRemoteDataSourceImpl extends NewsRemoteDataSource {
   });
 
   @override
-  Future<DataState<List<ArticleModel>>> getTopHeadlines() async {
+  Future<DataState<List<ArticleModel>>> getTopHeadlines({
+    String country = 'id',
+    int page = 1,
+    int pageSize = 10,
+  }) async {
     if (!await network.isConnected) {
       return const DataFailed(DataFailed.networkFailure);
     }
 
     try {
-      final httpResponse = await apiService.getTopHeadlines('id', 1, 5);
+      final httpResponse = await apiService.getTopHeadlines(country, page, pageSize);
 
       final data = httpResponse.data.articles;
       if (httpResponse.response.statusCode == 200) {
