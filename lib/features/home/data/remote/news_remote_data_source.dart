@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:news_apps/core/core.dart';
-import 'package:news_apps/features/home/data/remote/news_api_service.dart';
 
 import '../models/news_response.dart';
+import 'news_api_service.dart';
 
 abstract class NewsRemoteDataSource {
   Future<DataState<List<ArticleModel>>> getTopHeadlines();

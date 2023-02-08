@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Colors;
 import 'package:flutter_svg/svg.dart';
 import 'package:news_apps/core/core.dart';
 import 'package:news_apps/themes/themes.dart';
 
 void showSnackBar(BuildContext context, String message) =>
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message, style: TextStyles.reg12pt())),
+      SnackBar(content: Text(message, style: TextStyles.reg12pt(Colors.white))),
     );
 
 class NetworkImage extends StatelessWidget {

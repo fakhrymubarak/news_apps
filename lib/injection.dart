@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_apps/features/home/home.dart';
+import 'package:news_apps/features/top_headlines/presentation/bloc/top_headlines_bloc.dart';
 
 import 'core/core.dart';
 
@@ -16,6 +17,7 @@ void init() {
 
 void _newsInjector() {
   injector.registerFactory(() => HomeBloc(injector()));
+  injector.registerFactory(() => TopHeadlinesBloc(injector()));
 
   injector.registerLazySingleton<NewsRepository>(
     () => NewsRepositoryImpl(remoteDataSource: injector()),
