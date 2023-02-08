@@ -21,7 +21,7 @@ void main() {
     );
   });
 
-  final tArticles = [dummyArticle1, dummyArticles2];
+  final tArticles = [dummyArticle1, dummyArticle2];
 
   group('getTopHeadlines()', () {
     test(

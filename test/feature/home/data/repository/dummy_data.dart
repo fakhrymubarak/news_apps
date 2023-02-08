@@ -10,7 +10,7 @@ final dummyArticle1 = Article(
   publishedAt: DateTime.now(),
 );
 
-final dummyArticles2 = Article(
+final dummyArticle2 = Article(
   source: "na,e",
   author: "author2",
   title: "title2",
