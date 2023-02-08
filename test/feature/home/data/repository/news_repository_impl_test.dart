@@ -2,8 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:news_apps/core/core.dart';
-import 'package:news_apps/features/home/data/repositories/news_repository_impl.dart';
-import 'package:news_apps/features/home/domain/entities/article.dart';
+import 'package:news_apps/features/home/home.dart';
 
 import '../../helpers/home_test_helpers.mocks.dart';
 import '../remote/news_remote_data_source_test.dart';

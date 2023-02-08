@@ -36,13 +36,13 @@ class ArticleModel extends Equatable {
   });
 
   final Source source;
-  final String author;
+  final String? author;
   final String title;
   final String description;
   final String url;
   final String urlToImage;
   final DateTime publishedAt;
-  final String content;
+  final String? content;
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
         source: Source.fromJson(json["source"]),
@@ -57,12 +57,12 @@ class ArticleModel extends Equatable {
 
   Article toEntity() => Article(
       source: source.name,
-      author: author,
+      author: author ?? '-',
       title: title,
       description: description,
       url: url,
       urlToImage: urlToImage,
-      publishedAt: publishedAt);
+      publishedAt: publishedAt.toString().substring(0, 10));
 
   @override
   List<Object?> get props => [author, title];

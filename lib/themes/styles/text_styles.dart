@@ -16,7 +16,7 @@ class TextStyles {
   // SemiBold(w600), 14pt
   static TextStyle semiBold14pt([Color? color]) {
     return TextStyle(
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: FontWeight.w600,
       fontFamily: 'Poppins',
       color: color ?? Colors.black,
@@ -24,9 +24,9 @@ class TextStyles {
   }
 
   // Regular(w400), 12pt
-  static TextStyle regular12pt([Color? color]) {
+  static TextStyle reg12pt([Color? color]) {
     return TextStyle(
-      fontSize: 16,
+      fontSize: 12,
       fontWeight: FontWeight.w400,
       fontFamily: 'Poppins',
       color: color ?? Colors.black,
@@ -34,9 +34,9 @@ class TextStyles {
   }
 
   // Regular(w400), 10pt
-  static TextStyle regular10pt([Color? color]) {
+  static TextStyle reg10pt([Color? color]) {
     return TextStyle(
-      fontSize: 16,
+      fontSize: 10,
       fontWeight: FontWeight.w400,
       fontFamily: 'Poppins',
       color: color ?? Colors.gray,

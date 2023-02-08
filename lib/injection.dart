@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:news_apps/features/home/data/remote/news_api_service.dart';
-import 'package:news_apps/features/home/data/remote/news_remote_data_source.dart';
+import 'package:news_apps/features/home/home.dart';
 
 import 'core/core.dart';
 
@@ -16,7 +15,11 @@ void init() {
 }
 
 void _newsInjector() {
+  injector.registerFactory(() => HomeBloc(injector()));
 
+  injector.registerLazySingleton<NewsRepository>(
+    () => NewsRepositoryImpl(remoteDataSource: injector()),
+  );
   injector.registerLazySingleton<NewsRemoteDataSource>(
     () => NewsRemoteDataSourceImpl(apiService: injector(), network: injector()),
   );

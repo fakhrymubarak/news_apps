@@ -24,7 +24,7 @@ class NewsRemoteDataSourceImpl extends NewsRemoteDataSource {
     }
 
     try {
-      final httpResponse = await apiService.getTopHeadlines('id', 1, 20);
+      final httpResponse = await apiService.getTopHeadlines('id', 1, 5);
 
       final data = httpResponse.data.articles;
       if (httpResponse.response.statusCode == 200) {
@@ -35,6 +35,9 @@ class NewsRemoteDataSourceImpl extends NewsRemoteDataSource {
     } on DioError catch (e) {
       final errorMessage = DioException.fromDioError(e).toString();
       return DataFailed(errorMessage);
+    } catch (e, stackTrace) {
+      logError(e.toString(), stackTrace);
+      return DataFailed(e.toString());
     }
   }
 }

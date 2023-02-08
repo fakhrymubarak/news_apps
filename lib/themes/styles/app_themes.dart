@@ -13,7 +13,7 @@ ThemeData getAppTheme(BuildContext context) => ThemeData(
           ),
       unselectedWidgetColor: Colors.gray,
       textTheme: TextTheme(
-        bodyText2: TextStyles.regular12pt(),
+        bodyText2: TextStyles.reg12pt(),
         button: TextStyles.semiBold14pt(),
       ),
     );

@@ -18,7 +18,7 @@ class Article extends Equatable{
   final String description;
   final String url;
   final String urlToImage;
-  final DateTime publishedAt;
+  final String publishedAt;
 
   @override
   List<Object?> get props => [source, author, title];

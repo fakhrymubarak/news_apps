@@ -5,8 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:news_apps/core/core.dart';
 import 'package:news_apps/core/network/response/error_response.dart';
-import 'package:news_apps/features/home/data/models/news_response.dart';
-import 'package:news_apps/features/home/data/remote/news_remote_data_source.dart';
+import 'package:news_apps/features/home/home.dart';
 import 'package:retrofit/dio.dart';
 
 import '../../../../helpers/test_helpers.mocks.dart';
@@ -44,45 +43,64 @@ void main() {
         // arrange - response code to 200
         final httpResponse = HttpResponse(tHeadlinesResponse, testResponseOk);
 
-        when(mockApiService.getTopHeadlines('id', 1, 20)).thenAnswer(
+        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
           (_) async => httpResponse,
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 20));
-        final expectedResult = DataSuccess([dummyArticlesModel1, dummyArticlesModel2]);
+        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        final expectedResult =
+            DataSuccess([dummyArticlesModel1, dummyArticlesModel2]);
         expect(result, equals(expectedResult));
       });
 
       test('Should return DataFailed() when response code is 400', () async {
         // arrange - response code to 400
-        final httpResponse = HttpResponse(tHeadlinesResponse, testResponseUnauthorized);
+        final httpResponse =
+            HttpResponse(tHeadlinesResponse, testResponseUnauthorized);
 
-        when(mockApiService.getTopHeadlines('id', 1, 20)).thenAnswer(
-              (_) async => httpResponse,
+        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+          (_) async => httpResponse,
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 20));
-        const expectedResult = DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
+        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        const expectedResult =
+            DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
         expect(result, equals(expectedResult));
       });
 
-      test('Should return DataFailed() request send time out', () async {
+      test('Should return DataFailed() when request send time out', () async {
         // arrange - response timeout
-        when(mockApiService.getTopHeadlines('id', 1, 20)).thenAnswer(
-              (_) async => throw throwDioError,
+        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+          (_) async => throw throwDioError,
         );
         // act
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verify(mockApiService.getTopHeadlines('id', 1, 20));
-        const expectedResult = DataFailed<List<ArticleModel>>("Request send timeout.");
+        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        const expectedResult =
+            DataFailed<List<ArticleModel>>("Request send timeout.");
+        expect(result, equals(expectedResult));
+      });
+
+      test('Should return DataFailed() when unexpected exception', () async {
+        // arrange - response timeout
+        when(mockApiService.getTopHeadlines('id', 1, 5)).thenAnswer(
+          (_) async => throw ArgumentError("type 'Null' is not a subtype of type 'String'"),
+        );
+        // act
+        final result = await remoteDataSource.getTopHeadlines();
+
+        // assert
+        verify(mockApiService.getTopHeadlines('id', 1, 5));
+        const expectedResult =
+            DataFailed<List<ArticleModel>>("Invalid argument(s): type 'Null' is not a subtype of type 'String'");
         expect(result, equals(expectedResult));
       });
     });
@@ -96,8 +114,9 @@ void main() {
         final result = await remoteDataSource.getTopHeadlines();
 
         // assert
-        verifyNever(mockApiService.getTopHeadlines('id', 1, 20));
-        const expectedResult = DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
+        verifyNever(mockApiService.getTopHeadlines('id', 1, 5));
+        const expectedResult =
+            DataFailed<List<ArticleModel>>(DataFailed.networkFailure);
         expect(result, equals(expectedResult));
       });
     });

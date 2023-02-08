@@ -7,7 +7,7 @@ final dummyArticle1 = Article(
   description: "description",
   url: "url",
   urlToImage: "urlToImage",
-  publishedAt: DateTime.now(),
+  publishedAt: DateTime.now().toString(),
 );
 
 final dummyArticle2 = Article(
@@ -17,5 +17,5 @@ final dummyArticle2 = Article(
   description: "description",
   url: "url",
   urlToImage: "urlToImage",
-  publishedAt: DateTime.now(),
+  publishedAt: DateTime.now().toString(),
 );
