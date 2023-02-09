@@ -56,7 +56,7 @@ class ArticleModel extends Equatable {
       );
 
   Article toEntity() => Article(
-      source: source.name,
+      sourceco: source.name,
       author: author ?? '-',
       title: title,
       description: description,
