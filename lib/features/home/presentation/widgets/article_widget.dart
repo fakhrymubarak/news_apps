@@ -41,9 +41,11 @@ class ArticleWidget extends StatelessWidget {
 
               // Title, Content & Cover
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           article.title,

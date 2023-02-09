@@ -24,7 +24,7 @@ void main() {
           title:
               "Google Releases Flutter 3.7, Teases Future of App Development Framework",
           description: "description",
-          url: "url",
+          url: "https://news.slashdot.org/story/23/01/25/2055227/google-releases-flutter-37-teases-future-of-app-development-framework",
           urlToImage: "urlToImage",
           publishedAt: DateTime.now(),
           content: "content",
@@ -35,7 +35,7 @@ void main() {
           title:
               "Google Releases Flutter 3.7, Teases Future of App Development Framework2",
           description: "description",
-          url: "url",
+          url: "https://news.slashdot.org/story/23/01/25/2055227/google-releases-flutter-37-teases-future-of-app-development-framework",
           urlToImage: "urlToImage",
           publishedAt: DateTime.now(),
           content: "content",

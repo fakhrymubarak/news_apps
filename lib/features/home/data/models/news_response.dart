@@ -40,7 +40,7 @@ class ArticleModel extends Equatable {
   final String title;
   final String description;
   final String url;
-  final String urlToImage;
+  final String? urlToImage;
   final DateTime publishedAt;
   final String? content;
 
@@ -61,7 +61,7 @@ class ArticleModel extends Equatable {
       title: title,
       description: description,
       url: url,
-      urlToImage: urlToImage,
+      urlToImage: urlToImage ?? "",
       publishedAt: publishedAt.toString().substring(0, 10));
 
   @override
